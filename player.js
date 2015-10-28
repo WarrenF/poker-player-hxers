@@ -41,6 +41,13 @@ cardsSetup = {
     return false;
   },
   
+  goodCard: function( cards ) {
+    if( ! cards ) return false;
+    if( this.getRank( cards[0].rank ) === 'K' || this.getRank( cards[0].rank ) === 'Q' ||  this.getRank( cards[0].rank ) === 'J' || this.getRank( cards[0].rank ) === 'A' || this.getRank( cards[0].rank ) === '10' ) return true; 
+    if( this.getRank( cards[1].rank ) === 'K' || this.getRank( cards[1].rank ) === 'Q' ||  this.getRank( cards[1].rank ) === 'J' || this.getRank( cards[1].rank ) === 'A' || this.getRank( cards[1].rank ) == '10' ) return true; 
+    return false;
+  },
+  
   getCards: function( game_state ) {
     var me = game_state.players[game_state.in_action];
     var myCards = me.hole_cards;
@@ -89,6 +96,11 @@ module.exports = {
     } else {
     // Pre flop logic
       if( cardsSetup.pair( myCards )) {
+        bet( betAmount );
+        return;
+      }
+      
+      if( cardsSetup.goodCard( myCards )) {
         bet( betAmount );
         return;
       }
