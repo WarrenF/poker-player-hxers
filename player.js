@@ -2,7 +2,7 @@ var cardLogic = require( './cardLogic' );
 
 cardsSetup = {
   getRank: function( rank ) {
-    if( rank !== 'K' || rank !== 'Q' || rank !== 'J' || rank !== 'A' ) return rank;
+    if( rank !== 'K' && rank !== 'Q' && rank !== 'J' && rank !== 'A' ) return rank;
     switch( rank ) {
       case 'A':
         return 14;
@@ -78,7 +78,7 @@ module.exports = {
       return;
     }*/
     
-    if( betAmount >= me.stack ) {
+    if( betAmount >= me.stack && me.stack > 300 ) {
       bet( 0 );
       return;
     }
