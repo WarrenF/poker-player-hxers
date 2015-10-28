@@ -1,3 +1,5 @@
+var cardLogic = require( './cardLogic' );
+
 cardsSetup = {
   getRank: function( rank ) {
     if( rank !== 'K' || rank !== 'Q' || rank !== 'J' || rank !== 'A' ) return rank;
@@ -55,6 +57,7 @@ module.exports = {
     var betAmount = game_state.current_buy_in - me.bet;
     var gameCards = game_state.community_cards ? game_state.community_cards : [ ];
     var myCards = me.hole_cards;
+    var gameHand = cardLogic.sortCards( myCards, gameCards );
     /*var randomPlay = Math.floor( Math.random( ) * 10 );
     
     if( cardsSetup.distance( myCards )) {
@@ -67,14 +70,23 @@ module.exports = {
       return;
     }
     
-    if( cardsSetup.pair( myCards )) {
-      bet( betAmount );
-      return;
-    }
+    // Post flop logic
+    if( gameHand.value ) {
+      if( gameHand.value > 10000 ) {
+        bet( betAmount );
+        return;
+      }
+    } else {
+    // Pre flop logic
+      if( cardsSetup.pair( myCards )) {
+        bet( betAmount );
+        return;
+      }
     
-    if( cardsSetup.suit( myCards, gameCards )) {
-      bet( betAmount );
-      return;
+      if( cardsSetup.suit( myCards, gameCards )) {
+        bet( betAmount );
+        return;
+      }
     }
     bet( 0 );
   },
