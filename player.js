@@ -48,7 +48,7 @@ cardsSetup = {
 
 module.exports = {
 
-  VERSION: "Awesome JS player",
+  VERSION: "AI - Learning in progress...",
 
   bet_request: function(game_state, bet) {
     var me = game_state.players[game_state.in_action];
@@ -62,7 +62,7 @@ module.exports = {
       return;
     }*/
     
-    if( betAmount >= me.stack && ! gameCards.length ) {
+    if( betAmount >= ( me.stack * 0.8 ) ) {
       bet( 0 );
       return;
     }
