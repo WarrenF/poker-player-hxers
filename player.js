@@ -89,6 +89,7 @@ module.exports = {
       return;
     }
     if( gameHand.value ) {
+      if( game_state.current_buy_in === 0 ) betAmount += game_state.minimum_raise;
       if( gameHand.value > 16000 ) {
         bet( me.stack );
         return;
