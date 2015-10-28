@@ -67,7 +67,7 @@ module.exports = {
 
   bet_request: function(game_state, bet) {
     var me = game_state.players[game_state.in_action];
-    var betAmount = game_state.current_buy_in - me.bet;
+    var betAmount = game_state.current_buy_in - me.bet + game_state.minimum_raise;
     var gameCards = game_state.community_cards ? game_state.community_cards : [ ];
     var myCards = me.hole_cards;
     var gameHand = cardLogic.sortCards( myCards, gameCards );
@@ -80,7 +80,7 @@ module.exports = {
       return;
     }*/
     
-    if( betAmount >= me.stack && me.stack > 300 ) {
+    if( betAmount >= ( me.stack * 0.8 ) && me.stack > 300 ) {
       bet( 0 );
       return;
     }
@@ -91,7 +91,6 @@ module.exports = {
       return;
     }
     if( gameHand.value && tableHand.value && tableHand.value < gameHand.value ) {
-      if( game_state.current_buy_in === 0 ) betAmount += game_state.minimum_raise;
       if( gameHand.value > 16000 ) {
         bet( me.stack );
         return;
