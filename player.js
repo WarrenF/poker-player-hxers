@@ -71,6 +71,8 @@ module.exports = {
     var gameCards = game_state.community_cards ? game_state.community_cards : [ ];
     var myCards = me.hole_cards;
     var gameHand = cardLogic.sortCards( myCards, gameCards );
+    var tableHand = cardLogic.sortCards( [ ], gameCards );
+    if( ! tableHand.value ) tableHand = { value: 1 };
     /*var randomPlay = Math.floor( Math.random( ) * 10 );
     
     if( cardsSetup.distance( myCards )) {
@@ -88,7 +90,7 @@ module.exports = {
       bet( betAmount );
       return;
     }
-    if( gameHand.value ) {
+    if( gameHand.value && tableHand.value && tableHand.value < gameHand.value ) {
       if( game_state.current_buy_in === 0 ) betAmount += game_state.minimum_raise;
       if( gameHand.value > 16000 ) {
         bet( me.stack );
