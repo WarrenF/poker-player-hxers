@@ -29,7 +29,6 @@ cardsSetup = {
   
   distance: function( cards ) {
     if( ! cards ) return false;
-    console.log( ( this.getRank( cards[1].rank ) - this.getRank( cards[0].rank ) ) );
     if( ( this.getRank( cards[0].rank ) - this.getRank( cards[1].rank ) ) > 5 ) return true;
     if( ( this.getRank( cards[1].rank ) - this.getRank( cards[0].rank ) ) > 5 ) return true;
     return false;
@@ -50,16 +49,12 @@ module.exports = {
     var me = game_state.players[game_state.in_action];
     var betAmount = game_state.current_buy_in - me.bet;
     var myCards = me.hole_cards;
-    
-    if( betAmount >= me.stack ) {
-      bet( 0 );
-      return;
-    }
+    /*var randomPlay = Math.floor( Math.random( ) * 10 );
     
     if( cardsSetup.distance( myCards )) {
       bet( 0 );
       return;
-    }
+    }*/
     
     if( cardsSetup.pair( myCards )) {
       bet( betAmount );
