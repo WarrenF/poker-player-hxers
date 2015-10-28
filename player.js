@@ -100,15 +100,15 @@ module.exports = {
         return;
       }
       
-      if( cardsSetup.goodCard( myCards )) {
+      if( cardsSetup.goodCard( myCards ) && ! me.bet ) {
         bet( betAmount );
         return;
       }
     
-      if( cardsSetup.suit( myCards, gameCards )) {
+      /*if( cardsSetup.suit( myCards, gameCards )) {
         bet( betAmount );
         return;
-      }
+      }*/
     }
     bet( 0 );
   },
