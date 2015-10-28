@@ -80,7 +80,7 @@ module.exports = {
       return;
     }*/
     
-    if( betAmount >= ( me.stack * 0.8 ) && me.stack > 300 ) {
+    if( betAmount >= ( ( me.stack + me.bet ) * 0.8 ) && me.stack > 300 ) {
       bet( 0 );
       return;
     }
