@@ -72,7 +72,10 @@ module.exports = {
     
     // Post flop logic
     if( gameHand.value ) {
-      if( gameHand.value > 10000 ) {
+      if( gameCards.length > 3 && gameHand.value > 12000 ) {
+        bet( betAmount );
+        return;
+      } else if( gameHand.value > 10000 ) {
         bet( betAmount );
         return;
       }

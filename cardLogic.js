@@ -8,7 +8,8 @@ module.exports = {
 
   sortCards: function( cards, gameCards ) {
     if( ! cards.length || ! gameCards.length ) return false;
-    if( (cards.length + gameCards.length) < 3 ) return false;
+    var cardLength = (cards.length + gameCards.length);
+    if( cardLength !== 3 && cardLength !== 5 && cardLength !== 7 ) return false;
     var self = this;
     var newCards = [ ];
     cards.forEach( function( card ) {
