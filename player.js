@@ -62,6 +62,11 @@ module.exports = {
       return;
     }*/
     
+    if( betAmount >= me.stack && ! gameCards.length ) {
+      bet( 0 );
+      return;
+    }
+    
     if( cardsSetup.pair( myCards )) {
       bet( betAmount );
       return;
