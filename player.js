@@ -22,9 +22,14 @@ cardsSetup = {
     if( cards[0].rank == cards[1].rank ) return true;
   },
   
-  suit: function( cards ) {
+  suit: function( myCards, cards ) {
     if( ! cards ) return false;
-    if( cards[0].suit == cards[1].suit ) return true;
+    if( myCards[0].suit !== myCards[1].suit ) return false;
+    if( ! cards.length ) return true;
+    if( cards[0].suit === myCards[0].suit && cards.length === 3 ) return true;
+    if( cards[1].suit === myCards[0].suit && cards.length === 3 ) return true;
+    if( cards[2].suit === myCards[0].suit && cards.length === 3 ) return true;
+    return false;
   },
   
   distance: function( cards ) {
@@ -48,6 +53,7 @@ module.exports = {
   bet_request: function(game_state, bet) {
     var me = game_state.players[game_state.in_action];
     var betAmount = game_state.current_buy_in - me.bet;
+    var gameCards = game_state.community_cards ? game_state.community_cards : [ ];
     var myCards = me.hole_cards;
     /*var randomPlay = Math.floor( Math.random( ) * 10 );
     
@@ -61,7 +67,7 @@ module.exports = {
       return;
     }
     
-    if( cardsSetup.suit( myCards )) {
+    if( cardsSetup.suit( myCards, gameCards )) {
       bet( betAmount );
       return;
     }
