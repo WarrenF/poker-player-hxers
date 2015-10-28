@@ -1,9 +1,15 @@
-/*function getCards( game_state ) {
-  var me = game_state.players[game_state.in_action];
-  var myCards = me.hole_cards;
+/*cardsSetup = {
+  pair: function( cards ) {
+    if( ! cards ) return false;
+    
+  },
   
-}; */
-
+  getCards: function( game_state ) {
+    var me = game_state.players[game_state.in_action];
+    var myCards = me.hole_cards;
+    if( pair( myCards ))
+  },
+};*/
 
 module.exports = {
 
@@ -17,6 +23,10 @@ module.exports = {
     }
     var me = game_state.players[game_state.in_action];
     var betAmount = game_state.current_buy_in - me.bet + game_state.minimum_raise;
+    if( betAmount >= me.stack ) {
+      bet( 0 );
+      return;
+    }
     bet(betAmount);
   },
 
